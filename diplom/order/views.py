@@ -38,7 +38,7 @@ def cart_view(request, user_name):
         context = {'cart_items': all_items_in_order,
                    'cart_order': order,
                    'categories': Category.objects.all()}
-    except:
+    except ObjectDoesNotExist:
         context = {'empty_cart': True}
 
     return render(request, template, context)
