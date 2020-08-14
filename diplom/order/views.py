@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render, redirect
 
 from shop.models import Item, Category
@@ -12,7 +13,7 @@ def add_item_to_cart(request, item_id, user):
 
     try:
         current_order = Order.objects.get(user=user_object, is_active=True)
-    except:  # если заказа нет, то создаем
+    except ObjectDoesNotExist:  # если заказа нет, то создаем
         current_order = Order.objects.create(user=user_object, is_active=True)
 
     # проверим наличие данного товара в заказе, если есть то увеличим его кол-во += 1
@@ -20,7 +21,7 @@ def add_item_to_cart(request, item_id, user):
         current_item = ItemInOrder.objects.get(order=current_order, item=item)
         current_item.count += 1
         current_item.save()
-    except:
+    except ObjectDoesNotExist:
         ItemInOrder.objects.create(order=current_order, item=item)
 
     return redirect('base_view')
