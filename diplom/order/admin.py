@@ -12,7 +12,7 @@ class ItemInOrderInline(admin.TabularInline):
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ['id', 'user', 'total_price', 'status']
+    list_display = ['id', 'user', 'total_price', 'is_active', 'status']
     list_display_links = ['id', 'user']
     list_filter = ['user', 'status']
 

@@ -47,7 +47,6 @@ def cart_view(request, user_name):
 def confirm_order(request, order_id):
     '''Кнопка подтверждения заказа в корзине'''
     order = Order.objects.get(id=order_id)
-    order.status = Status.objects.get(name='Выполнен')
     order.is_active = False
     order.save()
     return redirect('base_view')
