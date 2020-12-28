@@ -54,4 +54,5 @@ def confirm_order(request, order_id):
 
 def not_authenticated_user(request):
     template = 'shop/not_authenticated_user.html'
-    return render(request, template)
+    context = {'categories': Category.objects.all()}
+    return render(request, template, context)

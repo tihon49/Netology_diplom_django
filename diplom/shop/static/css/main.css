@@ -1,3 +1,11 @@
 body {
   padding-top: 3.5rem;
 }
+
+.wrapper {
+  min-height: 500px;
+}
+
+.pagination_box {
+  margin-top: 200px;
+}

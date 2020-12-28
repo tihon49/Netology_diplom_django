@@ -74,7 +74,7 @@ WSGI_APPLICATION = 'diplom.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'rutracker_db',
+        'NAME': 'django_diplom',
         'USER': 'postgres',
         'PASSWORD': '1234',
         'HOST': 'localhost',

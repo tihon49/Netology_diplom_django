@@ -1,4 +1,6 @@
 from django.db import models
+from django.template.defaultfilters import slugify
+
 
 
 class Item(models.Model):
@@ -22,6 +24,9 @@ class Item(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_slug(self):
+        self.slug = slugify(self.name)
 
 
 class Category(models.Model):

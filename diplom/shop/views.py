@@ -19,8 +19,8 @@ def get_session_id(request):
 
 def base_view(request):
     '''главная страница'''
-    phones = Item.objects.filter(category=1)[:3]
-    wear = Item.objects.filter(category=2)[:3]
+    phones = Item.objects.filter(category__name='Телефоны')[:3]
+    wear = Item.objects.filter(category__name='Одежда')[:3]
     categories = Category.objects.all()
     context = {'phones': phones,
                'wear': wear,
@@ -117,6 +117,7 @@ def category_view(request, category_name):
     paginator = Paginator(items_in_current_category, 3)
     current_page = int(request.GET.get('page', 1))
     page_object = paginator.get_page(current_page)
+    pages_count = paginator.num_pages
     prev_page, next_page = None, None
 
     if page_object.has_next():
@@ -129,6 +130,8 @@ def category_view(request, category_name):
                'current_page': current_page,
                'prev_page_url': prev_page,
                'next_page_url': next_page,
+               'current_category': current_category,
+               'pages_count': pages_count,
                'categories': Category.objects.all()}
 
     return render(request, template, context)
@@ -137,4 +140,5 @@ def category_view(request, category_name):
 def empty_view(request):
     '''пустая страница'''
     template = 'shop/empty_section.html'
-    return render(request, template)
+    context = {'categories': Category.objects.all()}
+    return render(request, template, context)
